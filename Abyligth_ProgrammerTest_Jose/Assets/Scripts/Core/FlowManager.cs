@@ -10,6 +10,8 @@ namespace Core
         
         public static FlowManager Instance;
         
+        public string sceneLoad;
+        
         private void Awake()
         {
             CreateSingleton();
@@ -32,19 +34,22 @@ namespace Core
         #endregion
 
 
-        private void GoToInit()
+        public void GoToInit()
         {
+            sceneLoad = "Init";
             LoadScene("Init");
         }
 
-        private void GoToMenu()
+        public void GoToMenu()
         {
-            LoadScene("Menu");
+            sceneLoad = "Menu";
+            LoadScene("LoadingScreen");
         }
 
-        private void GoToInGame()
+        public void GoToInGame()
         {
-            LoadScene("InGame");
+            sceneLoad = "InGame";
+            LoadScene("LoadingScreen");
         }
 
         private void LoadScene(string sceneName)
