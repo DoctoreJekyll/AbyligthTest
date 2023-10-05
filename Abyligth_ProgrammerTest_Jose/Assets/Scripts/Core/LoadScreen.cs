@@ -15,7 +15,7 @@ namespace Core
         void Start()
         {
             SetDestinyScene();
-            StartCoroutine(CargarEscenaAsincrona());
+            StartCoroutine(LoadAsyncScene());
         }
 
         private void SetDestinyScene()
@@ -23,7 +23,7 @@ namespace Core
             destinyScene = FlowManager.Instance.sceneLoad;
         }
 
-        IEnumerator CargarEscenaAsincrona()
+        IEnumerator LoadAsyncScene()
         {
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(destinyScene);
 
@@ -37,7 +37,7 @@ namespace Core
                 // Interpola suavemente el progreso actual hacia el progreso real
                 actualProgress = Mathf.Lerp(actualProgress, progress, Time.deltaTime * 5f);
 
-                ActualizarBarraCarga(actualProgress);
+                LoadBarFill(actualProgress);
 
                 if (actualProgress >= 0.99f)
                 {
@@ -50,9 +50,9 @@ namespace Core
             System.GC.Collect();
         }
 
-        void ActualizarBarraCarga(float progreso)
+        void LoadBarFill(float progress)
         {
-            image.fillAmount = progreso;
+            image.fillAmount = progress;
         }
     }
 }
